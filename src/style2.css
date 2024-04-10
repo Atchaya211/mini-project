@@ -1,0 +1,436 @@
+.index{
+    background-color: black;
+}
+
+.initial{
+    background-image: url("./images/doc2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: lighten;
+    background-color: rgba(255, 255, 255, 0.3); 
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.wrap{
+    background-image: url("./images/bg2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: lighten;
+    background-color: rgba(255, 255, 255, 0.3); 
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0px;
+    padding-left: 15px;
+    padding-bottom: 25px;
+    /* padding: 5px; */
+}
+
+.Login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border:2px solid white; */
+    height: 55vh;
+    width: 55vw;
+    margin-left: 20%;
+    margin-top: 8%;
+    padding-bottom: 50px;
+    background-color:#246073;
+    border-radius: 20px;
+}
+
+.div-log{
+    display: flex;
+    padding: 0px;
+    /* border: 2px solid black; */
+    margin-top: 55px;
+    height:64vh;
+    width:55vw;
+    border-radius: 20px;
+}
+
+.left{
+    margin: -40px;
+    height: 500px;
+    width: 470px;
+    /* width: 50%; */
+    /* border: 2px solid yellow; */
+    border-radius: 20px 0px 0px 20px;
+    /* margin-left: -130px; */
+    margin-right: auto;
+    background-color: rgb(168, 170, 172);
+    display:flex;
+    /* flex-direction: column; */
+    align-items:center;
+    justify-content: center;
+}
+
+.right{
+    height: 466px;
+    margin: -50px;
+    width: 470px;
+    /* margin-right: -154px; */
+    margin-left: auto;
+    border-radius: 0px 20px 20px 0px;
+    /* border: 2px solid yellow; */
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.Patient{
+    align-self: center;
+    justify-self:left;
+    height: 25%;
+    width: 40%;
+    /* border: 2px solid black; */
+}
+
+.Doctor{
+    align-self: center;
+    /* justify-self: right; */
+    margin-right: 55px;
+    margin-top: 30px;
+    height: 60%;
+    width: 60%;
+    /* border: 2px solid black; */
+    margin-left: 53px;
+}
+
+.btn-1,.admin{
+    
+    background-color: transparent;
+    border: none;
+}
+
+.wrap{
+    height: 670px;
+    width: 99%;
+    /* margin-top: 10px; */
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logInDiv{
+    /* height: 400px;
+    width: 400px; */
+    height: 95%;
+    width: 70%;
+    padding-top: 0px;
+    margin-top: 15px;
+    /* border: 2px solid rgb(251, 251, 251); */
+    /* background-color:rgb(236, 236, 237,0.8); */
+    background-color: rgb(255, 228, 196);
+    /* background-color: white; */
+    /* background-color: rgb(67, 66, 66); */
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items:center;
+    align-content: space-around;
+    justify-content:space-around;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.LogInForm{
+    /* border: 2px solid black; */
+    margin-top: -10px;
+}
+
+.doc_nav{
+    /* margin-top: -15px; */
+    margin-bottom: 20px;
+    /* border-radius: 20px; */
+    height: 70px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    position:static;
+    z-index: 3;
+}
+
+.deletePat{
+    padding-bottom: 30px;
+}
+.insertPat{
+    margin: 50px 0px -50px 0px;
+    padding-bottom: 10px;
+    height: 90%;
+}
+.specific-inp{
+    height: 95%;
+    width: 70%;
+    /* padding-top: 0px; */
+    /* margin-top: 15px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items:center;
+    
+    /* align-content: space-around;
+    justify-content:space-around; */
+    overflow: scroll;
+}
+.specific-inp h3{
+    /* padding: 2px; */
+    padding: 2px 0px 6px 0px;
+}
+.gender,.Type{
+    display: grid;
+    grid-template-columns: auto auto;
+    font-size: large;
+    margin: 10px;
+}
+
+.gender_label{
+    margin-left: 50px;
+}
+
+.Type_label{
+    margin-left: 68px;
+}
+
+.insert, .delete,.doc_det{
+    background-color:black ;
+    color: aliceblue;
+    font-size: larger;
+    /* line-height: 70px; */
+}
+.doc_det-div{
+    width: 100%;
+    margin-top: -22px;
+    text-align: center;
+}
+.doc_det{
+    width: 100%;
+    height: 60px;
+    line-height: 70px;
+}
+
+.insert:hover,.delete:hover{
+    background-color: rgb(36, 35, 35);
+}
+
+.insert{
+    border-radius: 20px 0px 0px 0px;
+}
+
+.delete{
+    border-radius: 0px 20px 0px 0px;
+}
+/* .insertPat{
+    margin-top:-10px;
+} */
+
+.LogInForm{
+    display: grid;
+    grid-template-rows: auto;
+    row-gap: 2px;
+}
+
+.rec_wrap{
+    width: 60vw;
+    height: 75vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    /* overflow-y: scroll; */
+    /* border: 2px solid black; */
+}
+
+.rec{
+    height: 40px;
+    width: 100%;
+    /* background-color: rgb(67, 66, 66); */
+    background-color: white;
+    color: black;
+    /* color: aliceblue; */
+    margin: 3px;
+    display: grid;
+    /* grid-template-columns: auto auto auto auto auto auto 100px; */
+    grid-template-columns: 50px 220px 80px 150px 50px 250px 100px;
+    /* grid-template-columns: 2vw 25vw 5vw 10vw 80px 16vw 2vw; */
+}
+
+.pat_nav{
+    color: #e95f08;
+    font-size:xx-large;
+    font-weight: bolder;
+}
+
+.data{
+    text-align:center;
+    margin-top: 10px;
+}
+
+.rec_pat{
+    width: 80%;
+    height: 40px;
+    display: grid;
+    /* background-color:aliceblue; */
+    /* color:black; */
+    /* color: black; */
+    color: aliceblue;
+    grid-template-columns: 50% 50%;
+    background-color: rgb(67, 66, 66);
+}
+
+.remove_btn{
+    background-color: rgb(255, 35, 35);
+    color: aliceblue;
+}
+
+.rec_field{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.inp{
+    /* border:1px solid rgb(244, 241, 241, 0.8); */
+    /* border-radius: 10px; */
+    /* background-color: transparent; */
+    border: 0px;
+    border-bottom: 2px solid gray;
+    height: 40px;
+    width: 400px;
+    margin: 10px;
+    padding-left: 10px;
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
+}
+
+input:focus{
+    outline: none;
+}
+
+.submit{
+    background-color: rgba(12, 10, 10, 0.6);
+    color: whitesmoke;
+    font-family: cursive;
+    height: 50px;
+    width: 100px;
+    padding: 5px 15px;
+    border: 0px;
+    border-radius: 40px;
+    margin-bottom: 15px;
+}
+
+.abt,.admin{
+    color: whitesmoke;
+    font-family: cursive;
+    font-size: large;
+}
+
+.abt{
+    margin-top: 30px;
+}
+
+.admin{
+    color: bisque;
+    text-decoration: underline;
+    margin-left: 50%;
+    padding-top: 30px;
+    font-size:larger;
+}
+
+.back{
+    height: 50px;
+    width: 50px;
+    background-color: transparent;
+    border: 0px;
+    margin-left: 80%;
+}
+
+.backImg{
+    height: 100%;
+    width: 100%;
+}
+.docTypeDiv{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto auto auto auto auto;
+    text-align: center;
+    font-size: large;
+    /* border: 2px solid black; */
+    padding-top: 10px;
+    margin-top: -2%;
+    /* margin-bottom: -10px; */
+}
+.docTypeText_top,
+.docType_wrap{
+    display: grid;
+    grid-template-columns: auto;
+    color: aliceblue;
+    font-family:cursive;
+    font-size:x-large;
+    padding-right: 10px;
+    margin-bottom: 30px;
+}
+.docTypeText_top{
+    margin-top: -2px;
+    background-color: rgb(168, 170, 172);
+    width: 100%;
+    height: 50px;
+    padding-top:10px;
+    color: #011920;
+}
+.docTypeDiv_label{
+    font-size: large;
+    padding: 10px;
+}
+.docType-btn,.next{
+    height: 40px;
+    width: 150px;
+    margin-top: 20px;
+    margin-left: 40%;
+}
+.next{
+    background-color: black;
+    color: aliceblue;
+    margin-top: 30px;
+}
+
+/* .Navigate{
+    height: 40px;
+    margin-bottom: -50px;
+    background-color: rgba(0, 255, 255, 0.611);
+    display: grid;
+    grid-template-columns: 600px auto auto auto auto auto;
+    padding: 0px;
+    padding-bottom: 20px;
+} 
+
+.logo,.other{*/
+    /* border: 2px solid black; */
+    /* border-bottom: 2px solid whitesmoke; */
+    /* margin: 0px;
+    height: 100%;
+    margin-top: -100px;
+    background-color: transparent;
+    color: aliceblue;
+    margin-top: 10px;
+    border: 0px;
+
+}
+
+.logo{
+    padding-left: 20px;
+    font-size:xx-large;
+}
+
+.other{
+    text-decoration: underline;
+}
+
+.other:hover{
+    color: blue;
+} */
