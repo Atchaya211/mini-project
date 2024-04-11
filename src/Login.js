@@ -10,7 +10,7 @@ export default function Login(props)
     const [walletAddress, setWalletAddress] = useState(null);
     const [ userType, setUserType] = useState(null);
     // const [list, setList] = useState(false);
-    const [selectedValue, setSelectedValue] = useState('');
+    // const [selectedValue, setSelectedValue] = useState('');
     // const [contractInstance, setContractInstance] = useState(null);
     useEffect(() => {
         console.log(walletAddress);
@@ -76,7 +76,7 @@ export default function Login(props)
             setUserType("Doctor");
             props.connected(provider);
             // const signer = provider.getSigner();
-            const ehr = new ethers.Contract("0xfF9957b9e5c84F2Fa6b19464cC2b61aB76B46C70",abi,signer);
+            const ehr = new ethers.Contract("0xF925c63db5A71D05A9c21b0D5674541Dd479e504",abi,signer);
             // const ehr = new ethers.Contract(contractInfo.address,abi,provider);
             try{
                 console.log("inside try",address);
@@ -84,7 +84,7 @@ export default function Login(props)
                 console.log("before deptmethod:");
                 let department = await ehr.checkUser();
                 console.log("department:",department);
-                setSelectedValue(department);
+                // setSelectedValue(department);
                 props.updateDocType(department);
             }
             catch(error){
