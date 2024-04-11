@@ -390,3 +390,18 @@
     color: #fff;
     text-decoration: none;
   } */
+
+  .print-table {
+    width: 600px;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .print-row {
+    background-color:transparent;
+  }
+  
+  .print-data {
+    padding: 8px;
+    border: 1px solid #323131;
+  }

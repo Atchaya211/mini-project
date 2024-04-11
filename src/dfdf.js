@@ -15,6 +15,7 @@ export default function Login(props)
     useEffect(() => {
         console.log(walletAddress);
         console.log(userType);
+        // console.log(ethers.version);
         // const contract = new Web3.eth.Contract(abi, "0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8");
         // setContractInstance(contract);
     }, [walletAddress,userType]);
@@ -44,8 +45,14 @@ export default function Login(props)
             alert("Choose your department to proceed")
         }
         props.updateDocType(selectedValue);
+        // ######
         const provider = detectProvider();
-        // const provider = new ethers.providers.Web3Provider(window.ethereum)
+        // const signer = new ethers.providers.Web3Provider(window.ethereum);
+        const sign = new ethers.BrowserProvider(window.ethereum);
+        const signer = await sign.getSigner();
+        // const signer = new ethers.JsonRpcProvider(url);
+        // const provider = new ethers.BrowserProvider(window.ethereum);
+        // const signer = provider.getSigner();
         if(provider)
         {
             if(provider !== window.ethereum)
@@ -55,22 +62,26 @@ export default function Login(props)
             await provider.request({
                 method: "eth_requestAccounts"
             });
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            const address = accounts[0];
+            // const accounts = provider.getSigner();
+            // const address = await accounts.getAddress();
+            await provider.request({ method: "eth_requestAccounts" });
+            // const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            // const address = accounts[0];
+            const address = await signer.getAddress();
             // await provider.send("eth_requestAccounts",[])
             // const address = await provider.getSigner;
             setWalletAddress(address);
             setUserType("Doctor");
             props.connected(provider);
             // const signer = provider.getSigner();
-            const ehr = new ethers.Contract("0xd9145CCE52D386f254917e481eB44e9943F39138",abi,provider);
+            const ehr = new ethers.Contract("0xbcb40d99238CB1dD24A93b0fd0fd35f1cdDB4Eeb",abi,signer);
             // const ehr = new ethers.Contract(contractInfo.address,abi,provider);
             try{
                 console.log("inside try",address);
                 // const ehrDeploy = await ehr.constructor(["0x7816ca2ec251b5a94b16421febc66cb151f8dca4"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca5"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca6"]);
+                console.log("before deptmethod:");
                 let department = await ehr.checkUser();
-                
-                console.log("department;",department);
+                console.log("department:",department);
             }
             catch(error){
                 console.log("Error calling constructor:",error)

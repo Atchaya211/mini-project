@@ -9,7 +9,7 @@ export default function Login(props)
 {
     const [walletAddress, setWalletAddress] = useState(null);
     const [ userType, setUserType] = useState(null);
-    const [list, setList] = useState(false);
+    // const [list, setList] = useState(false);
     const [selectedValue, setSelectedValue] = useState('');
     // const [contractInstance, setContractInstance] = useState(null);
     useEffect(() => {
@@ -38,17 +38,22 @@ export default function Login(props)
 
     const loginHandleDoc = async () =>{
         // const value = document.querySelector('input[name="docTypeDiv"]:checked').value;
-        if(document.querySelector('input[name="docTypeDiv"]:checked')){
-            handleDoc();
-        }
-        else{
-            alert("Choose your department to proceed")
-        }
-        props.updateDocType(selectedValue);
+        // if(document.querySelector('input[name="docTypeDiv"]:checked')){
+        //     handleDoc();
+        // }
+        // else{
+        //     alert("Choose your department to proceed")
+        // }
+        handleDoc();
+        
+        // ######
         const provider = detectProvider();
         // const signer = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = new ethers.BrowserProvider(window.ethereum);
+        const sign = new ethers.BrowserProvider(window.ethereum);
+        const signer = await sign.getSigner();
         // const signer = new ethers.JsonRpcProvider(url);
+        // const provider = new ethers.BrowserProvider(window.ethereum);
+        // const signer = provider.getSigner();
         if(provider)
         {
             if(provider !== window.ethereum)
@@ -58,22 +63,29 @@ export default function Login(props)
             await provider.request({
                 method: "eth_requestAccounts"
             });
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            // const accounts = provider.getSigner();
+            // const address = await accounts.getAddress();
+            // await provider.request({ method: "eth_requestAccounts" });
+            let accounts = await sign.send("eth_requestAccounts",[])
+            // const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             const address = accounts[0];
+            // const address = await signer.getAddress();
             // await provider.send("eth_requestAccounts",[])
             // const address = await provider.getSigner;
             setWalletAddress(address);
             setUserType("Doctor");
             props.connected(provider);
             // const signer = provider.getSigner();
-            const ehr = new ethers.Contract("0xd9145CCE52D386f254917e481eB44e9943F39138",abi,signer);
+            const ehr = new ethers.Contract("0xfF9957b9e5c84F2Fa6b19464cC2b61aB76B46C70",abi,signer);
             // const ehr = new ethers.Contract(contractInfo.address,abi,provider);
             try{
                 console.log("inside try",address);
                 // const ehrDeploy = await ehr.constructor(["0x7816ca2ec251b5a94b16421febc66cb151f8dca4"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca5"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca6"]);
                 console.log("before deptmethod:");
-                let department = await ehr.checkUser(address);
+                let department = await ehr.checkUser();
                 console.log("department:",department);
+                setSelectedValue(department);
+                props.updateDocType(department);
             }
             catch(error){
                 console.log("Error calling constructor:",error)
@@ -82,9 +94,9 @@ export default function Login(props)
        
     };
 
-    const docTypefun = () =>{
-        setList(true);
-    }
+    // const docTypefun = () =>{
+    //     setList(true);
+    // }
 
     const loginHandlePat = async () =>{
         handlePat();
@@ -132,14 +144,14 @@ export default function Login(props)
     // const handleAdmin = () =>{
     //     props.updateAdmin(true);
     // }
-    const handleRadioChange = (event) => {
-        setSelectedValue(event.target.value);
-      };
+    // const handleRadioChange = (event) => {
+    //     setSelectedValue(event.target.value);
+    //   };
 
     return(
         <>
             <div className='Login'>
-            {!list && (
+            {/* {!list && ( */}
                 <div className='div-log'>
                 <div className="left">
                     <button onClick={loginHandlePat} className='btn-1'>
@@ -149,15 +161,15 @@ export default function Login(props)
                     
                 </div>
                 <div className="right">
-                    <button onClick={docTypefun} className='btn-1'>
+                    <button onClick={loginHandleDoc} className='btn-1'>
                         <img src={Doctor} alt='Doctor' className='Doctor'></img>
                         <p className="abt">I'm Doctor</p>
                     </button>
                 </div>
             </div>
-            )}
+            {/* )} */}
 
-            {list && (
+            {/* {list && (
                 <div className="docTypeDiv">
                         <label className='docType_wrap'>
                             <p className="docTypeText_top">Choose Department:</p>
@@ -184,7 +196,7 @@ export default function Login(props)
                         </label>
                         <button onClick={loginHandleDoc} className='docType-btn'>Submit</button>
                     </div>
-            )}
+            )} */}
         </div>
         {/* <button className="admin" type='submit' onClick={loginHandleAdmin}>
             For Admin Log in...

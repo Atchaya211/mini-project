@@ -13,7 +13,7 @@ const [currentAcc , setCurrentAcc] = useState(null);
 const [isDoctor , setIsDoctor] = useState(false);
 const [isPatient , setIsPatient] = useState(false);
 const [isAdmin , setIsAdmin] = useState(false);
-const [docType, setDocType] = useState("");
+const [docType, setDocType] = useState(0n);
 
 const updateDoc = () =>{
   setIsDoctor(!isDoctor);

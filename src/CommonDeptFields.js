@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import Login from "./Login";
 import Sample from "./sample.json";
 import back from "./images/back.png";
@@ -9,6 +9,8 @@ import CardioInsertFields from "./CardioInsertField";
 import GastroInsertFields from "./GastroInsertFields";
 import UroInsertFields from "./UroInsertField";
 import PrintReport from "./PrintReport";
+
+
 export default function CommonDeptFields({docType})
 {
     console.log(docType);
@@ -16,9 +18,16 @@ export default function CommonDeptFields({docType})
     const [next, setNext ] = useState(false);
     const [ print, setPrint ] = useState(false);
     const [view, setView ] = useState(true);
-    const [temp, setTemp] = useState("");
+    const [temp, setTemp] = useState([]);
     // const itemId = Sample.items.find(item => item.recordId === temp);
-    
+    const [ userInp, setUserInp] = useState([]);
+    const handleUserInp = (t) =>{
+        console.log("inside userInp parameter",t);
+        setUserInp(t);
+    }
+    useEffect(() => {
+        console.log("state", userInp);
+    }, [userInp]);
     const handleClose = () =>{
         window.location.reload();
       }
@@ -40,21 +49,43 @@ export default function CommonDeptFields({docType})
         setIsDelete(true);
         setIsInsert(false);
     }
+    const [selectedOption, setSelectedOption] = useState('');
+    const [args,setArgs] = useState([]);
+
+    const handleOptionChange = (event) => {
+        setSelectedOption(event.target.value);
+      };
+
     const handleNext = () =>{
         setNext(!next);
-        // console.log( document.getElementById('medicalRecordNumber').value)
+        //document.getElementById('medicalRecordNumber').value
+        const medicalRecordNumber = document.getElementById('medicalRecordNumber').value;
+        const patientName = document.getElementById('patientName').value;
+        const age = document.getElementById('age').value;
+        const gender = selectedOption;
+        const bloodGroup = document.getElementById('bloodGroup').value;
+        const temp = [medicalRecordNumber,patientName,age,gender,bloodGroup];
+        console.log(temp);
+        setArgs(temp);
+    }
+    useEffect(() => {
+        console.log("state args", args);
+    }, [args]);
+
+    const handleBack = () =>{
+        setNext(!next);
     }
     const handlePrint = (t) =>{
         setPrint(!print);
         setView(!view);
         setTemp(t);
-        console.log(temp);
+        // console.log(temp[1])
     }
+
     const handleView = () =>{
         setPrint(!print);
         setView(!view);
     }
-    
     return(
         <div className="wrap">
             <div className="logInDiv">
@@ -75,7 +106,7 @@ export default function CommonDeptFields({docType})
                                 <div className="rec_field">{item.gender}</div>
                                 <div className="rec_field">{item.bloodType}</div>
                                 <div className="rec_field">{item.diagnosis}</div>
-                                <button className="remove_btn" onClick={()=>handlePrint(item.name)}>Print🖨️</button>
+                                <button className="remove_btn" onClick={()=>handlePrint([item.recordId,item.name,item.age,item.gender,item.bloodType,item.diagnosis,item.allergies])}>Print🖨️</button>
                                 {/* {item.name} - {item.date} */}
                              </div>
                         ))}
@@ -98,11 +129,11 @@ export default function CommonDeptFields({docType})
                             Gender:
                             <label className="gender_label">
                                 Male:
-                                <input type="radio" name="gender" value="Male" />
+                                <input type="radio" name="gender" value="Male" onChange={handleOptionChange}/>
                             </label>
                             <label className="gender_label">
                                 Female:
-                                <input type="radio" name="gender" value="Female" />
+                                <input type="radio" name="gender" value="Female" onChange={handleOptionChange}/>
                             </label>
                         </label>
                     </div>
@@ -137,12 +168,13 @@ export default function CommonDeptFields({docType})
             }
             {!isDelete && isInsert && next && (
                 <div className="specific-inp">
-                    { docType === "Orthopedics" && (<OrthoInsertFields/>)}
-                    { docType === "Neurology" && (<NeuroInsertFields/>)}
-                    { docType === "Cardiology" && (<CardioInsertFields/>)}
-                    { docType === "Gastroenterology" && (<GastroInsertFields/>)}
-                    { docType === "Urology" && (<UroInsertFields/>)}
-                    <button className="next" onClick={handleNext}>Back</button>
+                    { docType === 4n && (<OrthoInsertFields handleUserInp={handleUserInp}/>)}
+                    { docType === 5n && (<NeuroInsertFields args={args}/>)}
+                    { docType === 6n && (<CardioInsertFields handleUserInp={handleUserInp}/>)}
+                    { docType === 7n && (<GastroInsertFields handleUserInp={handleUserInp}/>)}
+                    { docType === 8n && (<UroInsertFields handleUserInp={handleUserInp}/>)}
+                    {/* <button className="next sub">Submit</button> */}
+                    <button className="next back" onClick={handleBack}>Back</button>
                 </div>
             )}
             {!print && (<button className="back" onClick={handleClose}>
