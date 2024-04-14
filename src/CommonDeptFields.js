@@ -9,6 +9,8 @@ import CardioInsertFields from "./CardioInsertField";
 import GastroInsertFields from "./GastroInsertFields";
 import UroInsertFields from "./UroInsertField";
 import PrintReport from "./PrintReport";
+import PrintPrescription from "./PrintPrescription";
+import PrintReportComponent from "./PrintAllPatient";
 import { ethers } from "ethers";
 import abi from "./abi/abi.json";
 export default function CommonDeptFields({docType})
@@ -61,11 +63,13 @@ export default function CommonDeptFields({docType})
         setNext(!next);
         //document.getElementById('medicalRecordNumber').value
         const medicalRecordNumber = document.getElementById('medicalRecordNumber').value;
+        const userAddress = document.getElementById('userAddress').value;
+
         const patientName = document.getElementById('patientName').value;
         const age = document.getElementById('age').value;
         const gender = selectedOption;
         const bloodGroup = document.getElementById('bloodGroup').value;
-        const temp = [medicalRecordNumber,patientName,age,gender,bloodGroup];
+        const temp = [medicalRecordNumber,userAddress,patientName,age,gender,bloodGroup];
         console.log(temp);
         setArgs(temp);
     }
@@ -98,6 +102,8 @@ export default function CommonDeptFields({docType})
     const handleBlock = async ()=>{
         setPrint(!print);
         setView(!view);
+        setChoose(0);
+        // handleBlockSearch();
         // setNext(!next);
         const sign = new ethers.BrowserProvider(window.ethereum);
         let accounts = await sign.send("eth_requestAccounts",[]);
@@ -111,32 +117,43 @@ export default function CommonDeptFields({docType})
 
         const signer = await sign.getSigner();
         const address = accounts[0];
-        const ehr = new ethers.Contract("0xF925c63db5A71D05A9c21b0D5674541Dd479e504",abi,signer);
+        const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
         // console.log("inside eth fun search",search);
         if(docType === 4n){
            const tempArray = await ehr.getOrthopedicsTestReportDetails(search);
            console.log("blockArray:",tempArray);
            setBlockArray(tempArray);
+           const temp = await ehr.getOrthoMedicineList(search);
+           setBlockArraySearch(temp);
+
         }
         else if(docType === 5n){
             const tempArray = await ehr.getNeurologyTestReportDetails(search);
            console.log("blockArray:",tempArray);
            setBlockArray(tempArray);
+           const temp = await ehr.getNeuroMedicineList(search);
+           setBlockArraySearch(temp);
         }
         else if(docType === 6n){
             const tempArray = await ehr.getCardiologyTestReportDetails(search);
            console.log("blockArray:",tempArray);
            setBlockArray(tempArray);
+           const temp = await ehr.getCardioMedicineList(search);
+           setBlockArraySearch(temp);
         }
         else if(docType === 7n){
             const tempArray = await ehr.getGastroenterologyTestReportDetails(search);
            console.log("blockArray:",tempArray);
            setBlockArray(tempArray);
+           const temp = await ehr.getGastroMedicineList(search);
+           setBlockArraySearch(temp);
         }
         else if(docType === 8n){
             const tempArray = await ehr.getUrologyTestReportDetails(search);
            console.log("blockArray:",tempArray);
            setBlockArray(tempArray);
+           const temp = await ehr.getUroMedicineList(search);
+           setBlockArraySearch(temp);
         }
         console.log("inside try",address);
         // const ehrDeploy = await ehr.constructor(["0x7816ca2ec251b5a94b16421febc66cb151f8dca4"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca5"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca6"]);
@@ -145,7 +162,149 @@ export default function CommonDeptFields({docType})
         console.log("function was called successfully");
 
     }
+    const [choose, setChoose] = useState(0);
+    const [blockArraySearch, setBlockArraySearch] = useState([]);
+    const handleBlockSearch = async ()=>{
+        setPrint(!print);
+        setView(!view);
+        setChoose(1);
+        // setNext(!next);
+        const sign = new ethers.BrowserProvider(window.ethereum);
+        let accounts = await sign.send("eth_requestAccounts",[]);
+        // const balance = await sign.getBalance(accounts[0]);
+        // const balanceInEther = ethers.formatEther(balance);
+        // const block = await sign.getBlockNumber();
 
+        sign.on("block", (block) => {
+            this.setState({ block })
+          })
+
+        const signer = await sign.getSigner();
+        const address = accounts[0];
+        const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
+        // console.log("inside eth fun search",search);
+        if(docType === 4n){
+           const tempArray = await ehr.getOrthoMedicineList(search);
+           console.log("blockArray:",tempArray);
+           setBlockArraySearch(tempArray);
+        }
+        else if(docType === 5n){
+            const tempArray = await ehr.getNeuroMedicineList(search);
+           console.log("blockArray:",tempArray);
+           setBlockArraySearch(tempArray);
+        }
+        else if(docType === 6n){
+            const tempArray = await ehr.getCardioMedicineList(search);
+           console.log("blockArray:",tempArray);
+           setBlockArraySearch(tempArray);
+        }
+        else if(docType === 7n){
+            const tempArray = await ehr.getGastroMedicineList(search);
+           console.log("blockArray:",tempArray);
+           setBlockArraySearch(tempArray);
+        }
+        else if(docType === 8n){
+            const tempArray = await ehr.getUroMedicineList(search);
+           console.log("blockArray:",tempArray);
+           setBlockArraySearch(tempArray);
+        }
+        console.log("inside try",address);
+        // const ehrDeploy = await ehr.constructor(["0x7816ca2ec251b5a94b16421febc66cb151f8dca4"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca5"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca6"]);
+        console.log("before deptmethod:");
+        // await ehr.addOrthopedicsTestReport(args[0],args[1],args[2],args[3],args[4],tempArray[0],tempArray[1],tempArray[2],tempArray[3],tempArray[4],tempArray[5]);
+        console.log("function was called successfully");
+
+    }
+    const [totNo,setTotNo] = useState(0);
+    const [allPatList, setAllPatList] = useState([]);
+    const PrintAll = async ()=>{
+        setPrint(!print);
+        setView(!view);
+        setChoose(2);
+        // setNext(!next);
+        const sign = new ethers.BrowserProvider(window.ethereum);
+        let accounts = await sign.send("eth_requestAccounts",[]);
+        // const balance = await sign.getBalance(accounts[0]);
+        // const balanceInEther = ethers.formatEther(balance);
+        // const block = await sign.getBlockNumber();
+
+        sign.on("block", (block) => {
+            this.setState({ block })
+          })
+
+        const signer = await sign.getSigner();
+        const address = accounts[0];
+        const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
+        // console.log("inside eth fun search",search);
+        if(docType === 4n){
+           const tempArray = await ehr.getAllOrthopedicsRecords();
+           console.log("blockArray:",tempArray[1]);
+           const details = tempArray[1];
+           setTotNo(tempArray[0]);
+           setAllPatList(details);
+        }
+        else if(docType === 5n){
+            const tempArray = await ehr.getAllNeurologyRecords();
+           console.log("blockArray:",tempArray[1]);
+           const details = tempArray[1];
+           setTotNo(tempArray[0]);
+           setAllPatList(details);
+        }
+        else if(docType === 6n){
+            const tempArray = await ehr.getAllCardiologyRecords();
+           console.log("blockArray:",tempArray[1]);
+           const details = tempArray[1];
+           setTotNo(tempArray[0]);
+           setAllPatList(details);
+        }
+        else if(docType === 7n){
+            const tempArray = await ehr.getAllGastroenterologyRecords();
+           console.log("blockArray:",tempArray[1]);
+           const details = tempArray[1];
+           setTotNo(tempArray[0]);
+           setAllPatList(details);
+        }
+        else if(docType === 8n){
+            const tempArray = await ehr.getAllUrologyRecords();
+           console.log("blockArray:",tempArray[1]);
+           const details = tempArray[1];
+           setTotNo(tempArray[0]);
+           setAllPatList(details);
+        }
+        console.log("inside try",address);
+        // const ehrDeploy = await ehr.constructor(["0x7816ca2ec251b5a94b16421febc66cb151f8dca4"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca5"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca6"]);
+        console.log("All Patients:",allPatList);
+        console.log("Total no of rec:",totNo);
+        // await ehr.addOrthopedicsTestReport(args[0],args[1],args[2],args[3],args[4],tempArray[0],tempArray[1],tempArray[2],tempArray[3],tempArray[4],tempArray[5]);
+        console.log("function was called successfully");
+    }
+
+    // useEffect(() => {
+    //     console.log("state Pat:", allPatList);
+    // }, [allPatList]);
+
+    // useEffect(() => {
+    //     const input = document.getElementById('age');
+    
+    //     const checkPatternMismatch = () => {
+    //       const patternMismatch = input.validity.patternMismatch;
+    //       console.log(patternMismatch);
+    //     };
+    
+    //     input.addEventListener('input', checkPatternMismatch);
+    
+    //     // Cleanup function
+    //     return () => {
+    //       input.removeEventListener('input', checkPatternMismatch);
+    //     };
+    //   }, []);
+    // const [value, setValue] = useState();
+
+    // const handleChange = ({ target: { value } }) => {
+    //     setValue((prevState) =>
+    //       value.length <= 2 && !isNaN(Number(value)) ? value : prevState
+    //     );
+    //   };
     return(
         <div className="wrap">
             <div className="logInDiv">
@@ -156,10 +315,19 @@ export default function CommonDeptFields({docType})
             { isDelete && !isInsert && !print &&(
                 <div className="deletePat">
                     <form className="search">
-                        <input type="text" onChange={handelSearch} className="search-inp" />
-                        <button onClick={handleBlock}>search</button>
+                        <label className="medi">Print Report</label><br/>
+                        <input type="text" placeholder="Enter medical record number" onChange={handelSearch} className="search-inp" />
+                        <button onClick={handleBlock} className="search-btn">search</button>
                     </form>
-
+                    <form className="search">
+                        <label className="medi">Print Prescription</label><br/>
+                        <input type="text" placeholder="Enter medical record number" onChange={handelSearch} className="search-inp" />
+                        <button onClick={handleBlockSearch} className="search-btn">search</button>
+                    </form>
+                    <form className="search">
+                        <label className="medi all-pat-lab">Print Prescription</label>
+                        <button onClick={PrintAll} className="search-btn all-pat-btn">Print All</button>
+                    </form>
                     {/* {
                         <div className="rec_wrap">
                         {Sample.map((item) => (
@@ -178,16 +346,29 @@ export default function CommonDeptFields({docType})
                     } */}
                 </div>
             )}
-            { isDelete && !isInsert && print && (
-                <PrintReport tempVal={blockArray} handlePrint={handleView} docType={docType}/>
+            { isDelete && !isInsert && print && (choose === 0) && (
+                <PrintReport tempVal={blockArray} handlePrint={handleView} docType={docType} temp={blockArraySearch}/>
+            )}
+            { isDelete && !isInsert && print && (choose === 1) && (
+                <PrintPrescription tempVal={blockArraySearch} handlePrint={handleView}/>
+            )}
+            { isDelete && !isInsert && print && (choose === 2) && (
+                <PrintReportComponent allPatList={allPatList} handlePrint={handleView}/>
             )}
             {
                 !isDelete && isInsert && !next &&(
                     <div className="insertPat">
+                    {/* { docType === 4n && (<div>Ortho</div>)}
+                    { docType === 5n && (<div>Neuro</div>)}
+                    { docType === 6n && (<div>Cardio</div>)}
+                    { docType === 7n && (<div>Gastro</div>)}
+                    { docType === 8n && (<div>Uro</div>)} */}
                     <form className="LogInForm">
-                    <input type="text" placeholder="Medical rec no" id="medicalRecordNumber" className="inp"/>
+                    <input type="number" placeholder="Medical rec no" id="medicalRecordNumber" className="inp"/>
+                    <input type="text" placeholder="Patient Metamask address" id="userAddress" className="inp"/>
+
                     <input type="text" placeholder="Patient's Name" id="patientName" className="inp"/>
-                    <input type="text" placeholder="Enter Age" id="age" className="inp"/>
+                    <input type="number" placeholder="Enter Age" id="age" className="inp"/>
                     <div className="gender">
                         <label>
                             Gender:

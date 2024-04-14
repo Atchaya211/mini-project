@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { ethers } from "ethers";
 import abi from "./abi/abi.json";
 // import "./style2.css";
@@ -15,7 +15,9 @@ export default function NeuroInsertFields({args,handleBack}){
         const NeuropsychologicalTestingReport = document.getElementById('neuropsychologicalTestingReport').value;
         const GeneticTestingReport = document.getElementById('geneticTestingReport').value;
         const reportDate = document.getElementById('reportDate').value;
-        tempArray = [TestDate,NeurologicalExaminationReport,EegReport,LumbarPunctureReport,NeuropsychologicalTestingReport,GeneticTestingReport,reportDate];
+        const DoctorName = document.getElementById('doctorName').value;
+        const Medicine = textAreaValue.toString();
+        tempArray = [TestDate,NeurologicalExaminationReport,EegReport,LumbarPunctureReport,NeuropsychologicalTestingReport,GeneticTestingReport,DoctorName,Medicine,reportDate];
         console.log("inside ortho:",tempArray);
         // setAppend(tempArray);
         handleBlock();
@@ -42,14 +44,19 @@ export default function NeuroInsertFields({args,handleBack}){
 
         const signer = await sign.getSigner();
         const address = accounts[0];
-        const ehr = new ethers.Contract("0xF925c63db5A71D05A9c21b0D5674541Dd479e504",abi,signer);
+        const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
         console.log("inside try",address);
         // const ehrDeploy = await ehr.constructor(["0x7816ca2ec251b5a94b16421febc66cb151f8dca4"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca5"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca6"]);
         console.log("before deptmethod:");
-        await ehr.addNeurologyTestReport(args[0],args[1],args[2],args[3],args[4],tempArray[0],tempArray[1],tempArray[2],tempArray[3],tempArray[4],tempArray[5],tempArray[6]);
+        await ehr.addNeurologyTestReport(args[0],args[1],args[2],args[3],args[4],args[5],tempArray[0],tempArray[1],tempArray[2],tempArray[3],tempArray[4],tempArray[5],tempArray[6],tempArray[7],tempArray[8]);
         console.log("function was called successfully");
 
     }
+    const [textAreaValue, setTextAreaValue] = useState("");
+
+    const handleChange = (event) => {
+      setTextAreaValue(event.target.value);
+    };
     return(
         <>
             {/* <input type="text" placeholder="Test Name" id="testName" className="inp"/> */}
@@ -61,6 +68,11 @@ export default function NeuroInsertFields({args,handleBack}){
             <input type="text" placeholder="Neuro psychological TestingReport" id="neuropsychologicalTestingReport" className="inp"/>
             <input type="text" placeholder="Genetic Testing Report" id="geneticTestingReport" className="inp" />
             <input type="text" placeholder="Report Date" id="reportDate" className="inp" />
+            <input type="text" placeholder="Doctor Name" id="doctorName" className="inp" />
+            <div className="text-area">
+                <label className="medi">Medicine:</label>
+                <textarea id="medicine" onChange={handleChange} rows={7} cols={40}/>
+            </div>
             <button className="next sub" onClick={handleParameter}>Submit</button>
 
             {/* <input type="text" placeholder="Test Description" id="testDescription" className="inp"/>

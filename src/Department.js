@@ -67,9 +67,9 @@ import stomach1 from "./images/stomach2.png";
 import urology from "./images/urology.png";
 import urology1 from "./images/urology2.png";
 
-const Department = forwardRef(({ scrollToOrtho, scrollToNeuro, scrollToCardio, scrollToGastro, scrollToUro }, ref) => {
+const Department = forwardRef(({ scrollToOrtho, scrollToNeuro, scrollToCardio, scrollToGastro, scrollToUro }) => {
     return (
-        <div className="department" ref={ref}>
+        <div className="department">
             <h1 className="heading">Departments</h1>
             <div className="dept_icon_wrap">
                 <div className="deptname">

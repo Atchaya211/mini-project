@@ -14,6 +14,7 @@ const [isDoctor , setIsDoctor] = useState(false);
 const [isPatient , setIsPatient] = useState(false);
 const [isAdmin , setIsAdmin] = useState(false);
 const [docType, setDocType] = useState(0n);
+// const [patAddr,setPatAddr] = useState();
 
 const updateDoc = () =>{
   setIsDoctor(!isDoctor);
@@ -27,6 +28,9 @@ const updateAdmin = () =>{
 const updateDocType = (temp) =>{
   setDocType(temp);
 }
+// const updatePatType = (temp) =>{
+//   setPatAddr(temp);
+// }
 const connected = async (provider)=>{
   const web3 = new Web3(provider);
   const accounts = await web3.eth.getAccounts();

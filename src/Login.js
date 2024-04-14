@@ -35,6 +35,11 @@ export default function Login(props)
         }
         return provider;
     };
+    const handleClose = () =>{
+        alert("you are not registered user!!");
+        window.location.reload();
+        // setList(false);
+      }
 
     const loginHandleDoc = async () =>{
         // const value = document.querySelector('input[name="docTypeDiv"]:checked').value;
@@ -44,7 +49,7 @@ export default function Login(props)
         // else{
         //     alert("Choose your department to proceed")
         // }
-        handleDoc();
+        // handleDoc();
         
         // ######
         const provider = detectProvider();
@@ -76,13 +81,23 @@ export default function Login(props)
             setUserType("Doctor");
             props.connected(provider);
             // const signer = provider.getSigner();
-            const ehr = new ethers.Contract("0xF925c63db5A71D05A9c21b0D5674541Dd479e504",abi,signer);
+            const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
             // const ehr = new ethers.Contract(contractInfo.address,abi,provider);
             try{
+
                 console.log("inside try",address);
                 // const ehrDeploy = await ehr.constructor(["0x7816ca2ec251b5a94b16421febc66cb151f8dca4"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca5"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca6"]);
                 console.log("before deptmethod:");
                 let department = await ehr.checkUser();
+                const c = parseInt(department);
+                if(c === 4 || c === 5 || c === 6 || c === 7 || c === 8){
+                    console.log("inside if in login")
+                    handleDoc();
+                }
+                else{
+                    handleClose();
+                    // setList(true);
+                }
                 console.log("department:",department);
                 // setSelectedValue(department);
                 props.updateDocType(department);
@@ -99,8 +114,10 @@ export default function Login(props)
     // }
 
     const loginHandlePat = async () =>{
-        handlePat();
+        // handlePat();
         const provider = detectProvider();
+        const sign = new ethers.BrowserProvider(window.ethereum);
+        const signer = await sign.getSigner();
         if(provider)
         {
             if(provider !== window.ethereum)
@@ -110,29 +127,82 @@ export default function Login(props)
             await provider.request({
                 method: "eth_requestAccounts"
             });
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            // const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            let accounts = await sign.send("eth_requestAccounts",[])
             const address = accounts[0];
             setWalletAddress(address);
             setUserType("Patient");
             props.connected(provider);
+            const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
+            try{
+
+                console.log("inside try",address);
+                // const ehrDeploy = await ehr.constructor(["0x7816ca2ec251b5a94b16421febc66cb151f8dca4"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca5"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca6"]);
+                console.log("before deptmethod:");
+                let department = await ehr.checkUser();
+                const c = parseInt(department);
+                if(c === 2){
+                    handlePat();
+                }
+                else{
+                    handleClose();
+                    // setList(true);
+                }
+                console.log("department:",department);
+                // setSelectedValue(department);
+                // props.updatePatType(address);
+            }
+            catch(error){
+                console.log("Error calling constructor:",error)
+            }
+
         }
     };
 
-    // const loginHandleAdmin = async () =>{
-    //     handleAdmin();
-    //     const provider = detectProvider();
-    //     if(provider)
-    //     {
-    //         if(provider !== window.ethereum)
-    //         {
-    //             alert("Not window.ethereum");
-    //         }
-    //         await provider.request({
-    //             method: "eth_requestAccounts"
-    //         });
-    //         props.connected(provider);
-    //     }
-    // };
+    const loginHandleAdmin = async () =>{
+        handleAdmin();
+        const provider = detectProvider();
+        const sign = new ethers.BrowserProvider(window.ethereum);
+        const signer = await sign.getSigner();
+        if(provider)
+        {
+            if(provider !== window.ethereum)
+            {
+                alert("Not window.ethereum");
+            }
+            await provider.request({
+                method: "eth_requestAccounts"
+            });
+            props.connected(provider);
+        }
+        let accounts = await sign.send("eth_requestAccounts",[])
+        const address = accounts[0];
+        setWalletAddress(address);
+        setUserType("Admin");
+        props.connected(provider);
+        const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
+        try{
+
+            console.log("inside try",address);
+            // const ehrDeploy = await ehr.constructor(["0x7816ca2ec251b5a94b16421febc66cb151f8dca4"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca5"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca6"]);
+            console.log("before deptmethod:");
+            let department = await ehr.checkUser();
+            const c = parseInt(department);
+            if(c === 1){
+                handleAdmin();
+            }
+            else{
+                handleClose();
+                // setList(true);
+            }
+            console.log("department:",department);
+            // setSelectedValue(department);
+            props.updateDocType(department);
+        }
+        catch(error){
+            console.log("Error calling constructor:",error)
+        }
+    };
 
     const handleDoc = () =>{
         props.updateDoc(true);
@@ -141,9 +211,9 @@ export default function Login(props)
         props.updatePatient(true);
     }
 
-    // const handleAdmin = () =>{
-    //     props.updateAdmin(true);
-    // }
+    const handleAdmin = () =>{
+        props.updateAdmin(true);
+    }
     // const handleRadioChange = (event) => {
     //     setSelectedValue(event.target.value);
     //   };
@@ -167,7 +237,13 @@ export default function Login(props)
                     </button>
                 </div>
             </div>
-            {/* )} */}
+            {/* )}
+            {list && (
+                <>
+                    <div>You are not the registered user!!!</div>
+                    <button onClick={handleClose}>Retry</button>
+                </>
+            )} */}
 
             {/* {list && (
                 <div className="docTypeDiv">
@@ -198,9 +274,11 @@ export default function Login(props)
                     </div>
             )} */}
         </div>
-        {/* <button className="admin" type='submit' onClick={loginHandleAdmin}>
+        <div>
+        <button className="admin" type='submit' onClick={loginHandleAdmin}>
             For Admin Log in...
-        </button> */}
+        </button>
+        </div>
         </>
         
     );

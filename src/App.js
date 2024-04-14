@@ -66,7 +66,7 @@ function App() {
               <img src={Top} alt="" className="top_img" />
             </button>
             <div ref={services}>
-              <Department scrollToOrtho={()=>{scrollToDiv(orthoRef)}} scrollToCardio={()=>{scrollToDiv(cardioRef)}} scrollToNeuro={()=>{scrollToDiv(neuroRef)}}  scrollToGastro={()=>{scrollToDiv(gastorRef)}} scrollToUro={()=>{scrollToDiv(UroRef)}} ref={services}/>
+              <Department scrollToOrtho={()=>{scrollToDiv(orthoRef)}} scrollToCardio={()=>{scrollToDiv(cardioRef)}} scrollToNeuro={()=>{scrollToDiv(neuroRef)}}  scrollToGastro={()=>{scrollToDiv(gastorRef)}} scrollToUro={()=>{scrollToDiv(UroRef)}}/>
             </div>
             {/* <Department scrollToOrtho={()=>{scrollToDiv(orthoRef)}} scrollToCardio={()=>{scrollToDiv(cardioRef)}} scrollToNeuro={()=>{scrollToDiv(neuroRef)}}  scrollToGastro={()=>{scrollToDiv(gastorRef)}} scrollToUro={()=>{scrollToDiv(UroRef)}} ref={services}/> */}
             <Orthology ref={orthoRef}/>

@@ -161,6 +161,7 @@
 
 .deletePat{
     height: 90%;
+    width: 100%;
     padding-bottom: 30px;
 }
 .insertPat{
@@ -288,6 +289,14 @@
 .remove_btn{
     background-color: rgb(255, 35, 35);
     color: aliceblue;
+    height: 40px;
+    width: 100px;
+    margin-top: 20px;
+    /* margin-bottom: -150px; */
+}
+
+.report-back{
+    margin-top: -150px;
 }
 
 .rec_field{
@@ -397,13 +406,44 @@ input:focus{
 .next{
     background-color: black;
     color: aliceblue;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 .sub{
     margin-left:-250px;
+    margin-top: 5px;
 }
 .back{
-    margin-top: -40px;
+    margin-top: -35px;
+}
+.text-area{
+    display: flex;
+}
+.search-inp{
+    height: 30px;
+    width: 60%;
+    margin: 2% 0% 5% 10%;
+    padding: 3px 2px;
+}
+.search-btn{
+    height: 30px;
+    padding: 5px;
+    width: 10%;
+    background-color: #03556e;
+    color: aliceblue;
+    font-family: cursive;
+    margin-left: 10%;
+    margin-top: 20px;
+}
+.medi{
+    font-size: larger;
+    margin: 20% 3%;
+}
+.all-pat-lab{
+    margin-top: 5%;
+    margin-left: 30%;
+}
+.print-data{
+    text-align: center;
 }
 /* .Navigate{
     height: 40px;
