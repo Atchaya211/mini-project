@@ -445,6 +445,10 @@ input:focus{
 .print-data{
     text-align: center;
 }
+.patient-control-tab{
+    margin: 50px 0px 50px 0px;
+    height: 80%;
+}
 /* .Navigate{
     height: 40px;
     margin-bottom: -50px;

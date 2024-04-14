@@ -47,7 +47,7 @@ export default function AdminLgoIn(){
            
             let accounts = await sign.send("eth_requestAccounts",[])
             const address = accounts[0];
-            const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
+            const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
             try{
 
                 console.log("inside try",address);

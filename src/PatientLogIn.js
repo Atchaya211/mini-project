@@ -1,18 +1,29 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
 import { ethers } from "ethers";
 import abi from "./abi/abi.json";
-import Sample from "./sample.json";
+// import Sample from "./sample.json";
 import back from "./images/back.png"
 import "./style2.css";
 // import Login from "./Login";
 export default function PatientLogIn()
 {
+    useEffect(() => {
+        // Call your function here
+        fetchPatDet();
+      }, []);
+      
+    const [ortho, setOrtho] = useState([]);
+    const [neuro, setneuro] = useState([]);
+    const [cardio, setCardio] = useState([]);
+    const [gastro, setGastro] = useState([]);
+    const [uro, setUro] = useState([]);
+    
     const fetchPatDet = async () =>{
         const sign = new ethers.BrowserProvider(window.ethereum);
         const signer = await sign.getSigner();
         let accounts = await sign.send("eth_requestAccounts",[])
         const address = accounts[0];
-        const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
+        const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
         try{
 
             console.log("inside try",address);
@@ -24,15 +35,40 @@ export default function PatientLogIn()
                 console.log("inside if in login");
             }
             console.log("department:",department);
+            try{
+                const allPatRec = await ehr.findRecords(address);
+                console.log("neurooo:",allPatRec[2][0]);
+                if((allPatRec[0]).length !== 0){
+                    console.log("inside ortho");
+                    setOrtho(allPatRec[0][0]);
+                }
+                if((allPatRec[1]).length !== 0){
+                    console.log("inside ortho");
+                    setCardio(allPatRec[1][0]);
+                }
+                if((allPatRec[2]).length !== 0){
+                    console.log("inside ortho");
+                    setneuro(allPatRec[2][0]);
+                }
+                if((allPatRec[3]).length !== 0){
+                    console.log("inside ortho");
+                    setGastro(allPatRec[3][0]);
+                }
+                if((allPatRec[4]).length !== 0){
+                    console.log("inside ortho");
+                    setUro(allPatRec[4][0]);
+                }
+                console.log("ortho",allPatRec[2][0]);
+            }
+            catch(error){
+                console.log("Calling findRecords",error);
+            }
             // setSelectedValue(department);
             
         }
         catch(error){
-            console.log("Error calling constructor:",error)
+            console.log("Error calling constructor:",error);
         }
-    }
-    if(1){
-        fetchPatDet();
     }
     const handleClose = () =>{
         window.location.reload();
@@ -44,7 +80,129 @@ export default function PatientLogIn()
             </button>
             <div className="wrap">
             <div className="logInDiv">
-                <div className="pat_nav">My details</div>
+            <table className="print-table patient-control-tab">
+                <thead>
+                    <tr>
+                        <th className="print-data">Departments</th>
+                        <th className="print-data">Test reports</th>
+                        <th className="print-data">Test results</th>
+                    </tr>
+                </thead>
+                {/* {tempVal.map((val,key)=>{
+                    return(
+                        <tr key={key}>
+                            <td>{val}</td>
+                        </tr>
+                    )
+                })} */}
+                <tbody>
+                    <tr className="print-row">
+                        <td className="print-data" rowSpan={5}>Ortho</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">X-Ray report</td>
+                        <td className="print-data">{ortho[7]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">MRI report</td>
+                        <td className="print-data">{ortho[8]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">CT scan report</td>
+                        <td className="print-data">{ortho[9]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">UltraSound report</td>
+                        <td className="print-data">{ortho[10]}</td>
+                    </tr>
+
+                    <tr className="print-row">
+                        <td className="print-data" rowSpan={6}>neuro</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Neurological Examination Report</td>
+                        <td className="print-data">{neuro[7]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Electroencephalogram (EEG) Report</td>
+                        <td className="print-data">{neuro[8]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Lumbar Puncture (Spinal Tap) Report</td>
+                        <td className="print-data">{neuro[9]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Neuro psychological TestingReport</td>
+                        <td className="print-data">{neuro[10]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Genetic Testing Report</td>
+                        <td className="print-data">{neuro[11]}</td>
+                    </tr>
+
+                    <tr className="print-row">
+                        <td className="print-data" rowSpan={5}>cardio</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Electrocardiogram (ECG or EKG)</td>
+                        <td className="print-data">{cardio[7]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Echocardiogram (Echo)</td>
+                        <td className="print-data">{cardio[8]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Stress Test</td>
+                        <td className="print-data">{cardio[9]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Cardiac MRI</td>
+                        <td className="print-data">{cardio[10]}</td>
+                    </tr>
+
+                    <tr className="print-row">
+                        <td className="print-data" rowSpan={5}>Gastro</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Breath Tests report</td>
+                        <td className="print-data">{gastro[7]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Liver Biopsy report</td>
+                        <td className="print-data">{gastro[8]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Upper Endoscopy report</td>
+                        <td className="print-data">{gastro[9]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Capsule Endoscopy report</td>
+                        <td className="print-data">{gastro[10]}</td>
+                    </tr>
+
+                    <tr className="print-row">
+                        <td className="print-data" rowSpan={5}>Uro</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Urinalysis</td>
+                        <td className="print-data">{uro[7]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Urinary Culture</td>
+                        <td className="print-data">{uro[8]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Cystoscopy</td>
+                        <td className="print-data">{uro[9]}</td>
+                    </tr>
+                    <tr>
+                        <td className="print-data">Prostate Biopsy</td>
+                        <td className="print-data">{uro[10]}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button onClick={fetchPatDet}>getdata</button>
+                {/* <div className="pat_nav">My details</div>
                 <div className="rec_pat">
                     <div className="data">ID</div>
                     <div className="data">{Sample[0].recordId}</div>
@@ -76,7 +234,7 @@ export default function PatientLogIn()
                 <div className="rec_pat">
                     <div className="data">Treatment</div>
                     <div className="data">{Sample[0].treatment}</div>
-                </div>
+                </div> */}
 
                 {/* <form className="LogInForm">
                     <input type="text" placeholder="Enter Patient's Name:" className="inp"/>
@@ -84,9 +242,9 @@ export default function PatientLogIn()
                     <input type="text" placeholder="Confirm Password" className="inp"/> 
                 </form>
                 <button type="submit" className="submit">Sign In</button> */}
-                    <button className="back" onClick={handleClose}>
+                    {/* <button className="back" onClick={handleClose}>
                         <img src={back} alt="" className="backImg" />
-                    </button>
+                    </button> */}
             </div>
         </div>
  

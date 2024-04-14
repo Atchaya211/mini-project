@@ -117,43 +117,67 @@ export default function CommonDeptFields({docType})
 
         const signer = await sign.getSigner();
         const address = accounts[0];
-        const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
+        const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
         // console.log("inside eth fun search",search);
         if(docType === 4n){
+            try{
            const tempArray = await ehr.getOrthopedicsTestReportDetails(search);
            console.log("blockArray:",tempArray);
            setBlockArray(tempArray);
            const temp = await ehr.getOrthoMedicineList(search);
            setBlockArraySearch(temp);
-
+            }
+            catch(error){
+                console.log(error);
+            }
         }
         else if(docType === 5n){
+            try{
             const tempArray = await ehr.getNeurologyTestReportDetails(search);
            console.log("blockArray:",tempArray);
            setBlockArray(tempArray);
            const temp = await ehr.getNeuroMedicineList(search);
            setBlockArraySearch(temp);
+            }
+            catch(error){
+                console.log(error);
+            }
         }
         else if(docType === 6n){
+            try{
             const tempArray = await ehr.getCardiologyTestReportDetails(search);
            console.log("blockArray:",tempArray);
            setBlockArray(tempArray);
            const temp = await ehr.getCardioMedicineList(search);
            setBlockArraySearch(temp);
+            }
+            catch(error){
+                console.log(error);
+            }
         }
         else if(docType === 7n){
+            try{
             const tempArray = await ehr.getGastroenterologyTestReportDetails(search);
            console.log("blockArray:",tempArray);
            setBlockArray(tempArray);
            const temp = await ehr.getGastroMedicineList(search);
            setBlockArraySearch(temp);
+            }
+            catch(error){
+                console.log(error);
+            }
         }
         else if(docType === 8n){
+            try{
             const tempArray = await ehr.getUrologyTestReportDetails(search);
            console.log("blockArray:",tempArray);
            setBlockArray(tempArray);
            const temp = await ehr.getUroMedicineList(search);
            setBlockArraySearch(temp);
+            }
+            catch(error){
+                console.log(error);
+            }
         }
         console.log("inside try",address);
         // const ehrDeploy = await ehr.constructor(["0x7816ca2ec251b5a94b16421febc66cb151f8dca4"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca5"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca6"]);
@@ -181,32 +205,57 @@ export default function CommonDeptFields({docType})
 
         const signer = await sign.getSigner();
         const address = accounts[0];
-        const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
+        const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
         // console.log("inside eth fun search",search);
         if(docType === 4n){
+            try{
            const tempArray = await ehr.getOrthoMedicineList(search);
            console.log("blockArray:",tempArray);
            setBlockArraySearch(tempArray);
+            }
+            catch(error){
+                console.log(error);
+            }
         }
         else if(docType === 5n){
+            try{
             const tempArray = await ehr.getNeuroMedicineList(search);
            console.log("blockArray:",tempArray);
            setBlockArraySearch(tempArray);
+            }
+            catch(error){
+                console.log(error);
+            }
         }
         else if(docType === 6n){
+            try{
             const tempArray = await ehr.getCardioMedicineList(search);
            console.log("blockArray:",tempArray);
            setBlockArraySearch(tempArray);
+            }
+            catch(error){
+                console.log(error);
+            }
         }
         else if(docType === 7n){
+            try{
             const tempArray = await ehr.getGastroMedicineList(search);
            console.log("blockArray:",tempArray);
            setBlockArraySearch(tempArray);
+            }
+            catch(error){
+                console.log(error);
+            }
         }
         else if(docType === 8n){
+            try{
             const tempArray = await ehr.getUroMedicineList(search);
            console.log("blockArray:",tempArray);
            setBlockArraySearch(tempArray);
+            }
+            catch(error){
+                console.log(error);
+            }
         }
         console.log("inside try",address);
         // const ehrDeploy = await ehr.constructor(["0x7816ca2ec251b5a94b16421febc66cb151f8dca4"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca5"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca6"]);
@@ -234,7 +283,7 @@ export default function CommonDeptFields({docType})
 
         const signer = await sign.getSigner();
         const address = accounts[0];
-        const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
+        const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
         // console.log("inside eth fun search",search);
         if(docType === 4n){
            const tempArray = await ehr.getAllOrthopedicsRecords();

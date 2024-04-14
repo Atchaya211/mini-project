@@ -81,7 +81,7 @@ export default function Login(props)
             setUserType("Doctor");
             props.connected(provider);
             // const signer = provider.getSigner();
-            const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
+            const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
             // const ehr = new ethers.Contract(contractInfo.address,abi,provider);
             try{
 
@@ -133,7 +133,7 @@ export default function Login(props)
             setWalletAddress(address);
             setUserType("Patient");
             props.connected(provider);
-            const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
+            const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
             try{
 
                 console.log("inside try",address);
@@ -180,7 +180,7 @@ export default function Login(props)
         setWalletAddress(address);
         setUserType("Admin");
         props.connected(provider);
-        const ehr = new ethers.Contract("0x75Bbc02f4C2036DEF20D1CB25492cf847C757964",abi,signer);
+        const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
         try{
 
             console.log("inside try",address);
