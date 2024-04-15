@@ -23,7 +23,7 @@ export default function PatientLogIn()
         const signer = await sign.getSigner();
         let accounts = await sign.send("eth_requestAccounts",[])
         const address = accounts[0];
-        const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
+        const ehr = new ethers.Contract("0x4587fdC50640756bf4543d4ff602Fc69361627Ad",abi,signer);
         try{
 
             console.log("inside try",address);
@@ -37,7 +37,7 @@ export default function PatientLogIn()
             console.log("department:",department);
             try{
                 const allPatRec = await ehr.findRecords(address);
-                console.log("neurooo:",allPatRec[2][0]);
+                // console.log("neurooo:",allPatRec[2][0]);
                 if((allPatRec[0]).length !== 0){
                     console.log("inside ortho");
                     setOrtho(allPatRec[0][0]);
@@ -58,7 +58,7 @@ export default function PatientLogIn()
                     console.log("inside ortho");
                     setUro(allPatRec[4][0]);
                 }
-                console.log("ortho",allPatRec[2][0]);
+                // console.log("ortho",allPatRec[2][0]);
             }
             catch(error){
                 console.log("Calling findRecords",error);
@@ -199,9 +199,17 @@ export default function PatientLogIn()
                         <td className="print-data">Prostate Biopsy</td>
                         <td className="print-data">{uro[10]}</td>
                     </tr>
+                    <tr>
+                        <td colSpan={3}>
+                            <button className="tab-back" onClick={handleClose}>back</button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-            <button onClick={fetchPatDet}>getdata</button>
+            <button className="back" onClick={handleClose}>
+                <img src={back} alt="" className="backImg" />
+            </button>
+            {/* <button onClick={fetchPatDet}>getdata</button> */}
                 {/* <div className="pat_nav">My details</div>
                 <div className="rec_pat">
                     <div className="data">ID</div>
@@ -242,9 +250,7 @@ export default function PatientLogIn()
                     <input type="text" placeholder="Confirm Password" className="inp"/> 
                 </form>
                 <button type="submit" className="submit">Sign In</button> */}
-                    {/* <button className="back" onClick={handleClose}>
-                        <img src={back} alt="" className="backImg" />
-                    </button> */}
+                    
             </div>
         </div>
  

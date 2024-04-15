@@ -364,38 +364,77 @@ input:focus{
     width: 100%;
 }
 .docTypeDiv{
-    height: 100%;
+    height: 80%;
     width: 100%;
     display: grid;
-    grid-template-rows: auto auto auto auto auto;
+    grid-template-rows: auto;
     text-align: center;
     font-size: large;
     /* border: 2px solid black; */
-    padding-top: 10px;
-    margin-top: -2%;
-    /* margin-bottom: -10px; */
+    /* padding-top: 10px; */
+    /* margin-top: 10%; */
+    border: 2px solid black;
+    /* margin-bottom: -100px; */
 }
 .docTypeText_top,
 .docType_wrap{
     display: grid;
     grid-template-columns: auto;
-    color: aliceblue;
-    font-family:cursive;
+    font-family: cursive;
     font-size:x-large;
-    padding-right: 10px;
-    margin-bottom: 30px;
+    height: 80%;
+    padding: 20px;
+    /* margin-bottom: -5px; */
 }
 .docTypeText_top{
-    margin-top: -2px;
-    background-color: rgb(168, 170, 172);
+    margin-top: -20px;
     width: 100%;
-    height: 50px;
+    height: 30px;
     padding-top:10px;
+    font-size:x-large;
     color: #011920;
+    border: 2px solid black;
+}
+.addusernav{
+    /* border: 2PX solid black; */
+    height: 100%;
+    width: 100%;
+    margin-top: -9px;
+    text-align: center;
+}
+.addusertop{
+    height: 50px;
+    background-color: #000000;
+    color: aliceblue;
+    font-size:x-large;
+    line-height: 50px;
+}
+.aduseraddr{
+    height: 40px;
+    width: 70%;
+    margin: 30px 0px;
+    padding-left: 30px;
+}
+.selectusertype{
+    margin-left: 10%;
+    text-align: left;
+    font-size:larger;
+}
+.adduserpara{
+    text-align: left;
+    margin-left: 20%;
+    height: 30px;
+    font-size: large;
+    padding: 10px;
+}
+.docTypeText{
+    height: 35px;
+    padding-bottom: 3px;
 }
 .docTypeDiv_label{
     font-size: large;
-    padding: 10px;
+    /* height: 50px; */
+    padding: 12px;
 }
 .docType-btn,.next{
     height: 40px;
@@ -424,7 +463,7 @@ input:focus{
     margin: 2% 0% 5% 10%;
     padding: 3px 2px;
 }
-.search-btn{
+.search-btn,.add-user{
     height: 30px;
     padding: 5px;
     width: 10%;
@@ -447,8 +486,23 @@ input:focus{
 }
 .patient-control-tab{
     margin: 50px 0px 50px 0px;
-    height: 80%;
+    height: 60%;
 }
+.add-user{
+    width: 100px;
+    margin-top: -90px;
+    /* margin-bottom: 100px; */
+    margin-left: 0%;
+}
+.tab-back{
+    width: 100%;
+    border: 0px;
+    background-color: #000000;
+    color: aliceblue;
+    margin: 0px;
+    height: 30px;
+}
+
 /* .Navigate{
     height: 40px;
     margin-bottom: -50px;

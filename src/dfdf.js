@@ -74,7 +74,7 @@ export default function Login(props)
             setUserType("Doctor");
             props.connected(provider);
             // const signer = provider.getSigner();
-            const ehr = new ethers.Contract("0xbcb40d99238CB1dD24A93b0fd0fd35f1cdDB4Eeb",abi,signer);
+            const ehr = new ethers.Contract("0x4587fdC50640756bf4543d4ff602Fc69361627Ad",abi,signer);
             // const ehr = new ethers.Contract(contractInfo.address,abi,provider);
             try{
                 console.log("inside try",address);

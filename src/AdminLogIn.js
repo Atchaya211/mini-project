@@ -4,7 +4,6 @@ import back from "./images/back.png";
 import "./style2.css";
 import { ethers } from "ethers";
 import abi from "./abi/abi.json";
-
 export default function AdminLgoIn(){
     const [selectedValue, setSelectedValue] = useState('');
     const detectProvider = () => {
@@ -47,7 +46,7 @@ export default function AdminLgoIn(){
            
             let accounts = await sign.send("eth_requestAccounts",[])
             const address = accounts[0];
-            const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
+            const ehr = new ethers.Contract("0x4587fdC50640756bf4543d4ff602Fc69361627Ad",abi,signer);
             try{
 
                 console.log("inside try",address);
@@ -76,44 +75,42 @@ export default function AdminLgoIn(){
     return(
         <div className="wrap">
             <div className="logInDiv">
-            <form className="search">
-                <label className="medi">Enter the new user details:</label><br/>
-                <input type="text" id="addr" placeholder="Enter new user address" className="search-inp" />
-                <div className="docTypeDiv">
-                        <label className='docType_wrap'>
-                            <p className="docTypeText_top">Choose Type:</p>
-                            <label className="docTypeDiv_label">
-                                <p className="docTypeText">Patient
-                                <input type="radio" name="docTypeDiv" value="1"  onChange={handleRadioChange}/></p>
-                            </label>
-                            <label className="docTypeDiv_label">
-                                <p className="docTypeText">Nurse
-                                <input type="radio" name="docTypeDiv" value="2"  onChange={handleRadioChange}/></p>
-                            </label>
-                            <label className="docTypeDiv_label">
-                                <p className="docTypeText">Orthopedics Doctor
-                                <input type="radio" name="docTypeDiv" value="3"  onChange={handleRadioChange}/></p>
-                            </label>
-                            <label className="docTypeDiv_label">
-                                <p className="docTypeText">Neurology Doctor
-                                <input type="radio" name="docTypeDiv" value="4" onChange={handleRadioChange}/></p>
-                            </label>
-                            <label className="docTypeDiv_label">
-                                <p className="docTypeText">Cardiology Doctor
-                                <input type="radio" name="docTypeDiv" value="5" onChange={handleRadioChange}/></p>
-                            </label>
-                            <label className="docTypeDiv_label">
-                                <p className="docTypeText">Gastroenterology Doctor
-                                <input type="radio" name="docTypeDiv" value="6" onChange={handleRadioChange}/></p>
-                            </label>
-                            <label className="docTypeDiv_label">
-                                <p className="docTypeText">Urology Doctor
-                                <input type="radio" name="docTypeDiv" value="7" onChange={handleRadioChange}/></p>
-                            </label>
-                        </label>
-                    </div>
-                <button className="search-btn" onClick={handleAdduser}>search</button>
+            <form className="addusernav">
+                <p className="addusertop">Add User</p>
+                <input type="text" id="addr" className="aduseraddr" placeholder="Enter new user address" />
+                <p className="selectusertype">User Type</p>
+
+                <label>
+                <p className="adduserpara">Patient
+                <input type="radio" name="docTypeDiv" value="1"  onChange={handleRadioChange}/></p>
+                </label>
+                <label>
+                <p className="adduserpara">Nurse
+                <input type="radio" name="docTypeDiv" value="2"  onChange={handleRadioChange}/></p>
+                </label>
+                <label>
+                <p className="adduserpara">Orthopedics Doctor
+                <input type="radio" name="docTypeDiv" value="3"  onChange={handleRadioChange}/></p>
+                </label>
+                <label>
+                <p className="adduserpara">Neurology Doctor
+                <input type="radio" name="docTypeDiv" value="4" onChange={handleRadioChange}/></p>
+                </label>
+                <label>
+                <p className="adduserpara">Cardiology Doctor
+                <input type="radio" name="docTypeDiv" value="5" onChange={handleRadioChange}/></p>
+                </label>
+                <label>
+                <p className="adduserpara">Gastroenterology Doctor
+                <input type="radio" name="docTypeDiv" value="6" onChange={handleRadioChange}/></p>
+                </label>
+                <label>
+                <p className="adduserpara">Urology Doctor
+                <input type="radio" name="docTypeDiv" value="7" onChange={handleRadioChange}/></p>
+                </label>
             </form>
+           
+                <button className="add-user" onClick={handleAdduser}>Add User</button>
                 <button className="back" onClick={handleClose}>
                     <img src={back} alt="" className="backImg" />
                 </button>

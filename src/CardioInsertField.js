@@ -37,7 +37,7 @@ export default function CardioInsertFields({args,handleBack}){
 
         const signer = await sign.getSigner();
         const address = accounts[0];
-        const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
+        const ehr = new ethers.Contract("0x4587fdC50640756bf4543d4ff602Fc69361627Ad",abi,signer);
         console.log("inside try",address);
         // const ehrDeploy = await ehr.constructor(["0x7816ca2ec251b5a94b16421febc66cb151f8dca4"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca5"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca8"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca7"],["0x7816ca2ec251b5a94b16421febc66cb151f8dca6"]);
         console.log("before deptmethod:");

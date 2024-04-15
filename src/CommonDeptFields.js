@@ -117,7 +117,7 @@ export default function CommonDeptFields({docType})
 
         const signer = await sign.getSigner();
         const address = accounts[0];
-        const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
+        const ehr = new ethers.Contract("0x4587fdC50640756bf4543d4ff602Fc69361627Ad",abi,signer);
         // console.log("inside eth fun search",search);
         if(docType === 4n){
             try{
@@ -205,7 +205,7 @@ export default function CommonDeptFields({docType})
 
         const signer = await sign.getSigner();
         const address = accounts[0];
-        const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
+        const ehr = new ethers.Contract("0x4587fdC50640756bf4543d4ff602Fc69361627Ad",abi,signer);
         // console.log("inside eth fun search",search);
         if(docType === 4n){
             try{
@@ -283,7 +283,7 @@ export default function CommonDeptFields({docType})
 
         const signer = await sign.getSigner();
         const address = accounts[0];
-        const ehr = new ethers.Contract("0x51Ae13A18789814a85822452a871C2c434Ead9D1",abi,signer);
+        const ehr = new ethers.Contract("0x4587fdC50640756bf4543d4ff602Fc69361627Ad",abi,signer);
         // console.log("inside eth fun search",search);
         if(docType === 4n){
            const tempArray = await ehr.getAllOrthopedicsRecords();
@@ -374,7 +374,7 @@ export default function CommonDeptFields({docType})
                         <button onClick={handleBlockSearch} className="search-btn">search</button>
                     </form>
                     <form className="search">
-                        <label className="medi all-pat-lab">Print Prescription</label>
+                        <label className="medi all-pat-lab">Print Patients List</label>
                         <button onClick={PrintAll} className="search-btn all-pat-btn">Print All</button>
                     </form>
                     {/* {
@@ -471,9 +471,9 @@ export default function CommonDeptFields({docType})
                     <button className="next back" onClick={handleBack}>Back</button>
                 </div>
             )}
-            {!print && (<button className="back" onClick={handleClose}>
+            <button className="back" onClick={handleClose}>
                 <img src={back} alt="" className="backImg" />
-            </button>)}
+            </button>
             </div>
         </div>
     );
