@@ -23,7 +23,7 @@ export default function PatientLogIn()
         const signer = await sign.getSigner();
         let accounts = await sign.send("eth_requestAccounts",[])
         const address = accounts[0];
-        const ehr = new ethers.Contract("0x4587fdC50640756bf4543d4ff602Fc69361627Ad",abi,signer);
+        const ehr = new ethers.Contract("0x05c5B11E06CbdC60297Ec4E6DCdBB0e4D321eBD8",abi,signer);
         try{
 
             console.log("inside try",address);
